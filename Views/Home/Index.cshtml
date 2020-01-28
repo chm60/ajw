@@ -1,0 +1,97 @@
+﻿@using AJW.Models
+@model IList<AJW.Models.Order>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>AJW Test Application</h1>
+    <p class="lead">Use the form below to search for a specific Sales Order or Part Number.</p>
+
+    <form class="form-inline" method="get">
+        <div class="form-group">
+                    <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search">&nbsp;
+                </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>
+    
+</div>
+
+<div class="row">
+    
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Click on any of the records below for more detail</div>
+    
+      <!-- Table -->
+      <table class="table table-hover">
+          <tr>
+              <th>Sales Order</th>
+              <th>Date</th>
+              <th>Po Ref</th>
+              <th>Line Item</th>
+              <th>Ship To</th>
+              <th>Customer</th>
+              <th>Part Number</th>
+          </tr>
+          @if (Model != null)
+          {
+               foreach (Order o in Model)
+                        {
+                            <tr data-toggle="collapse" data-target="#accordion_@o.SoNumber" class="clickable">
+                                <td>@o.SoNumber </td>
+                                <td>@o.DateCreated </td>
+                                <td>@o.CompanyRefNumber </td>
+                                <td>@o.ItemNumber </td>
+                                <td>@o.ShipAddress1 </td>
+                                <td>@o.CompanyName </td>
+                                <td>@o.PnUpper </td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="7">
+                                    <div id="accordion_@o.SoNumber" class="collapse">
+                                        
+                                        <ul class="list-group">
+                                            <li class="list-group-item">Sale Order Detail AutoKey : @o.SaleOrderDetailAutoKey</li>
+                                            <li class="list-group-item">Company AutoKey : @o.CompanyAutoKey</li>
+                                            <li class="list-group-item">Po Ref : @o.CompanyRefNumber</li>
+                                            <li class="list-group-item">Sales Order : @o.SoNumber</li>
+                                            <li class="list-group-item">Date : @o.DateCreated</li>
+                                            <li class="list-group-item">Ship Address 1 : @o.ShipAddress1</li>
+                                            <li class="list-group-item">Ship Address 2 : @o.ShipAddress2</li>
+                                            <li class="list-group-item">Attention : @o.Attention</li>
+                                            <li class="list-group-item">Open : @o.OpenFlag</li>
+                                            <li class="list-group-item">Number Of Items : @o.NumberOfItems</li>
+                                            <li class="list-group-item">Item Number : @o.ItemNumber</li>
+                                            <li class="list-group-item">Route Code : @o.RouteCode</li>
+                                            <li class="list-group-item">Part Number : @o.PnUpper</li>
+                                            <li class="list-group-item">Quantity Ordered : @o.QtyOrdered</li>
+                                            <li class="list-group-item">Quantity Reserved : @o.QtyReserved</li>
+                                            <li class="list-group-item">Quantity Pending Invoice : @o.QtyPendingInvoice</li>
+                                            <li class="list-group-item">Quantity Invoiced : @o.QtyInvoiced</li>
+                                            <li class="list-group-item">Description : @o.DescriptionUpper</li>
+                                            <li class="list-group-item">Price : @o.CustomerPrice</li>
+                                            <li class="list-group-item">Currency : @o.CurrencyCode</li>
+                                            <li class="list-group-item">Shimpment Date : @o.NextShipDate</li>
+                                            <li class="list-group-item">Parts Master AutoKey : @o.PartsMasterAutoKey</li>
+                                            <li class="list-group-item">Company Name : @o.CompanyName</li>
+                                        </ul>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+          }
+         
+       
+      </table>
+    </div>
+    
+    
+    
+</div>
